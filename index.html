@@ -72,6 +72,11 @@
 
         <div class="board" id="board"></div>
         <div id="win-modal" class="win-modal">
+                    <div class="video-frame">
+                    <video class="win-video" muted  playsinline>
+                        <source src="assets/copo/copo2.mp4" type="video/mp4">
+                    </video>
+                </div>
             <div class="win-content">
 
                 <!-- TROFÉU -->
@@ -100,6 +105,11 @@
         <!-- ===== MODAL DE DERROTA ===== -->
         <div class="win-modal" id="lose-modal">
             <div class="win-content lose">
+                <div class="video-frame">
+                    <video class="win-video" muted  playsinline>
+                        <source src="assets/copo/copo2.mp4" type="video/mp4">
+                    </video>
+                </div>
 
 
                 <div class="win-text-concluir">
@@ -110,12 +120,12 @@
                 <button class="win-circle-btn" id="lose-restart-btn">
                     <span class="play-text">CONCLUIR</span>
                 </button>
-                <div class="viewer-3d resgatar-3d">
+                <!-- <div class="viewer-3d resgatar-3d">
                     <model-viewer src="assets/copo_rutra_premium.glb" alt="Modelo 3D Rutra" auto-rotate
                         rotation-per-second="20deg" camera-controls disable-zoom exposure="1.1" shadow-intensity="1"
                         environment-image="neutral" loading="eager">
                     </model-viewer>
-                </div>
+                </div> -->
 
             </div>
         </div>

@@ -20,6 +20,21 @@ let startTime = 0;
 let totalDuration = 0;
 
 
+function playVideoInModal(modal) {
+  if (!modal) return;
+
+  const video = modal.querySelector("video");
+  if (!video) return;
+
+  video.currentTime = 0;
+  video.muted = true;
+
+  const p = video.play();
+  if (p) {
+    p.catch(err => console.warn("Erro ao iniciar vídeo:", err));
+  }
+}
+
 
 
 const board = document.getElementById('board');
@@ -62,53 +77,53 @@ function describeSector(cx, cy, r, angle) {
 }
 
 function startGameTimer(duration = 20) { // Garanta que a duração aqui seja 20
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-    totalDuration = duration * 1000;
-    startTime = performance.now();
+  totalDuration = duration * 1000;
+  startTime = performance.now();
 
-    pizzaTimer.classList.remove('hidden', 'danger');
-    timerEl.classList.remove('hidden', 'danger');
+  pizzaTimer.classList.remove('hidden', 'danger');
+  timerEl.classList.remove('hidden', 'danger');
 
-    // Reset imediato para o topo (0 graus)
-    pizzaHand.style.transform = `rotate(0deg)`;
+  // Reset imediato para o topo (0 graus)
+  pizzaHand.style.transform = `rotate(0deg)`;
 
-    timerInterval = setInterval(() => {
-        if (gameEnded) {
-            clearInterval(timerInterval);
-            return;
-        }
+  timerInterval = setInterval(() => {
+    if (gameEnded) {
+      clearInterval(timerInterval);
+      return;
+    }
 
-        const elapsed = performance.now() - startTime;
-        let remaining = totalDuration - elapsed;
+    const elapsed = performance.now() - startTime;
+    let remaining = totalDuration - elapsed;
 
-        if (remaining < 0) remaining = 0;
+    if (remaining < 0) remaining = 0;
 
-        // Atualiza texto do cronômetro
-        const seconds = Math.floor(remaining / 1000);
-        const cents = Math.floor((remaining % 1000) / 10);
-        document.getElementById('time-seconds').textContent = seconds;
-        document.getElementById('time-cents').textContent = String(cents).padStart(2, '0');
+    // Atualiza texto do cronômetro
+    const seconds = Math.floor(remaining / 1000);
+    const cents = Math.floor((remaining % 1000) / 10);
+    document.getElementById('time-seconds').textContent = seconds;
+    document.getElementById('time-cents').textContent = String(cents).padStart(2, '0');
 
-        // CÁLCULO DO ÂNGULO
-        // Progress vai de 0 a 1 em 20 segundos
-        const progress = Math.min(elapsed / totalDuration, 1);
-        const angle = 360 * progress; 
+    // CÁLCULO DO ÂNGULO
+    // Progress vai de 0 a 1 em 20 segundos
+    const progress = Math.min(elapsed / totalDuration, 1);
+    const angle = 360 * progress;
 
-        // Aplica a rotação. 
-        // Agora o 0deg é o topo, então o ponteiro seguirá o sentido horário corretamente.
-        pizzaHand.style.transform = `rotate(${angle}deg)`;
+    // Aplica a rotação. 
+    // Agora o 0deg é o topo, então o ponteiro seguirá o sentido horário corretamente.
+    pizzaHand.style.transform = `rotate(${angle}deg)`;
 
-        if (remaining <= 5000) { // Alerta nos últimos 5 segundos
-            pizzaTimer.classList.add('danger');
-            timerEl.classList.add('danger');
-        }
+    if (remaining <= 5000) { // Alerta nos últimos 5 segundos
+      pizzaTimer.classList.add('danger');
+      timerEl.classList.add('danger');
+    }
 
-        if (remaining <= 0) {
-            clearInterval(timerInterval);
-            handleGameOver();
-        }
-    }, 40); 
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      handleGameOver();
+    }
+  }, 40);
 }
 
 
@@ -133,7 +148,15 @@ function handleGameOver() {
 
   setTimeout(() => {
     loseModal.classList.add('active');
+
+    // toca quando o modal já está ativo
+    requestAnimationFrame(() => {
+      playVideoInModal(loseModal);
+    });
+
   }, 600);
+
+
 }
 
 
@@ -195,7 +218,7 @@ function aplicarPremio(remainingSeconds) {
   // reinicia vídeo
   video.currentTime = 0;
   video.muted = true;
-  video.play().catch(() => {});
+  video.play().catch(() => { });
 }
 
 
@@ -257,17 +280,17 @@ function checkWin() {
   });
 
   // abre modal
-setTimeout(() => {
-  winModal.classList.add('active');
+  setTimeout(() => {
+    winModal.classList.add('active');
 
-  // só toca DEPOIS de aparecer
-  const video = document.getElementById("copo-video-win");
-  if (video) {
-    video.currentTime = 0;
-    video.muted = true;
-    video.play().catch(() => {});
-  }
-}, 600);
+    // inicia no frame correto
+    requestAnimationFrame(() => {
+      playVideoInModal(loseModal); // ou winModal
+    });
+
+
+  }, 600);
+
 
 }
 
@@ -412,7 +435,7 @@ startButton.addEventListener('click', () => {
 
     // ⏱️ delay suave antes de iniciar o cronômetro
     setTimeout(() => {
-      startGameTimer(100);
+      startGameTimer(1);
     }, 1000);
 
   }, 200 + cards.length * 60 + 300);
