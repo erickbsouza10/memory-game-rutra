@@ -116,7 +116,7 @@ body::before {
 .app {
   min-height: 100vh;
   width: 100%;
-  transform: scale(0.9);
+
   display: flex;
   flex-direction: column;
 
@@ -601,10 +601,8 @@ body::before {
   inset: 0;
   z-index: 10000;
 
-  background: rgba(0, 0, 0, 0.267);
-  /* escurece */
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(10px);
+  background: transparent; /* 🔑 importante */
+  backdrop-filter: none;    /* blur vem no overlay, não aqui */
 
   display: flex;
   align-items: center;
@@ -613,7 +611,17 @@ body::before {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease;
+
+  overflow: hidden;
 }
+
+
+.win-content {
+  position: relative;
+  z-index: 2;
+}
+
+
 
 
 .win-modal.active {
@@ -629,7 +637,7 @@ body::before {
   /* Não passa de 550px em telas grandes */
   aspect-ratio: 1 / 1;
   /* GARANTE QUE SEJA SEMPRE UM CÍRCULO */
-
+  
   border-radius: 50%;
   /* Força o arredondamento */
   color: white !important;
@@ -757,11 +765,12 @@ body::before {
 }
 
 .win-content {
-  width: 600px !important;
-  height: 600px !important;
+  width: auto;
+  height: auto;
+  min-width: 1080px;
 
-  border-radius: 100%;
 
+  border-radius: 0 !important;
 
   display: flex;
   flex-direction: column;
@@ -779,7 +788,7 @@ body::before {
 
 /* BOTÃO CIRCULAR DO MODAL */
 .win-circle-btn {
-  width: 9vh !important;
+  width: 13% !important;
   height: 60px !important;
 
   border-radius: 30px !important;
@@ -806,7 +815,8 @@ body::before {
 
 .win-text-concluir {
   position: relative;
-  top: 6px !important;
+  top: -50px !important;
+  transform: scale(0.78);
 }
 
 /* ÍCONE DE PRESENTE */
@@ -910,11 +920,12 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 10px;
-
+  position: relative;
+  top: -80px;
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
   letter-spacing: 1.5px;
-
+  
   cursor: pointer;
 
   /* SOMBRA CIRCULAR CORRETA */
@@ -992,6 +1003,10 @@ body::before {
   display: flex;
   align-items: center;
   gap: 15px;
+  transform: scale(0.8);
+ 
+  position: relative;
+  z-index: 999999 !important;
   font-weight: 800;
   color: #18203f;
   transition: all 0.3s ease;
@@ -1056,7 +1071,7 @@ body::before {
 
 .timers {
   position: relative;
-  top: -30px;
+  top: -150px;
   display: flex;
   flex-direction: row;
   right: 20px;
@@ -1158,7 +1173,7 @@ body::before {
   box-shadow:
     0 3px 0px #641e16,
     0 28px 40px rgba(0, 0, 0, 0.116);
-  border-radius: 100px;
+
 }
 
 .win-content.lose .win-circle-btn:hover {
@@ -1278,7 +1293,29 @@ model-viewer {
   top: 50px;
 }
 
-.win-content {
-  height: 100vh !important;
-  margin-top: 500px;
+
+/* ===== VIDEO BACKGROUND MODAL ===== */
+/* ===== FRAME DO VÍDEO (ENCAPSULADO) ===== */
+.video-frame {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 53%;
+  z-index: 0;
+  pointer-events: none;
 }
+
+/* ===== VÍDEO EM PROPORÇÃO ORIGINAL ===== */
+.win-video {
+  width: auto;
+  height: auto;
+
+  max-width: 90vw;   /* limita na largura da tela */
+  max-height: 90vh;  /* limita na altura da tela */
+
+  object-fit: contain; /* 🔑 mantém proporção original */
+}
+
