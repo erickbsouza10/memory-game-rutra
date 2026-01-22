@@ -435,7 +435,7 @@ startButton.addEventListener('click', () => {
 
     // ⏱️ delay suave antes de iniciar o cronômetro
     setTimeout(() => {
-      startGameTimer(100);
+      startGameTimer(1);
     }, 1000);
 
   }, 200 + cards.length * 60 + 300);

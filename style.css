@@ -779,7 +779,7 @@ body::before {
 
 /* BOTÃO CIRCULAR DO MODAL */
 .win-circle-btn {
-  width: 9vh !important;
+  width: 31% !important;
   height: 60px !important;
 
   border-radius: 30px !important;
@@ -840,6 +840,7 @@ body::before {
 
 .win-content {
   gap: 12px;
+  transform: scale(1.3);
 }
 
 @keyframes trophyPop {
