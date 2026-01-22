@@ -132,7 +132,7 @@ body::before {
   display: grid;
 
   /* FORÇA 5 COLUNAS */
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   /* duas linhas naturais */
   grid-auto-rows: 1fr;
@@ -159,7 +159,7 @@ body::before {
   display: grid;
 
   /* FORÇA 5 COLUNAS */
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   /* duas linhas naturais */
   grid-auto-rows: 1fr;
@@ -650,7 +650,7 @@ body::before {
   animation: winPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   top: -300px;
-  height: 100vh !important;
+  height: auto !important;
 }
 
 .win-content h2 {
@@ -1281,4 +1281,114 @@ model-viewer {
 .win-content {
   height: 100vh !important;
   margin-top: 500px;
+}
+
+/* ===============================
+   TABLET GRANDE – 2360x1640
+=============================== */
+@media (min-width: 2200px) and (min-height: 1500px) {
+
+  /* APP */
+  .app {
+    padding: 24px;
+  }
+
+  /* ===== BOARD ===== */
+  .board {
+    max-width: 00px;
+    gap: 36px;
+    margin-top: 40px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .card {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  /* ===== START SCREEN ===== */
+  .main-logo {
+    width: 600px !important;
+    top: -10px !important;
+  }
+
+  .logo-glow {
+    width: 420px;
+    height: 420px;
+    filter: blur(120px);
+  }
+
+  .game-title {
+    font-size: 34px !important;
+    letter-spacing: 10px;
+    margin-bottom: 48px;
+  }
+
+  .play-btn {
+    transform: scale(1.25) !important;
+    padding: 30px 80px !important;
+    font-size: 1.6rem;
+  }
+
+  /* ===== TIMER ===== */
+  .timers {
+    top: 0;
+    right: 0;
+    gap: 20px;
+  }
+
+  .game-timer {
+    font-size: 4.6rem;
+    width: 220px;
+  }
+
+  .pizza-timer {
+    width: 120px;
+    height: 120px;
+    transform: scale(1);
+  }
+
+  /* ===== MODAL DE VITÓRIA ===== */
+  .win-content {
+    width: 720px !important;
+    height: 720px !important;
+    transform: scale(1);
+    top: 0;
+    margin-top: 0;
+  }
+
+  .win-content h2 {
+    font-size: 2.8rem;
+  }
+
+  .win-content p {
+    font-size: 1.1rem;
+    width: 65%;
+  }
+
+  .win-circle-btn {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .win-circle-btn .play-text {
+    font-size: 1.6rem !important;
+  }
+
+  .win-trophy {
+    width: 120px;
+    top: 20px;
+  }
+
+  /* ===== VIEWER 3D ===== */
+  .viewer-3d {
+    width: 900px;
+    height: 900px;
+  }
+
+  .resgatar-3d {
+    width: 480px !important;
+    height: 480px !important;
+    top: 20px;
+  }
 }
