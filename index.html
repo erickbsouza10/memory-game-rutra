@@ -88,7 +88,7 @@
                     <span class="play-text">RESGATAR</span>
                 </button>
                 <div class="viewer-3d resgatar-3d">
-                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="3deg"
+                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="4deg"
                         camera-controls="false" disable-zoom exposure="1" shadow-intensity="0"
                         environment-image="neutral" loading="lazy" interpolation-decay="120" minimum-render-scale="1"
                         maximum-render-scale="1.25">
@@ -130,19 +130,6 @@
 
 
     </div>
-    <script>
-        const viewer = document.querySelector("model-viewer");
-
-        // Pausa rotação quando não está visível (economiza GPU)
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                viewer.autoRotate = entry.isIntersecting;
-            },
-            { threshold: 0.2 }
-        );
-
-        observer.observe(viewer);
-    </script>
 
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
