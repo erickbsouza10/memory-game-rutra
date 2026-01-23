@@ -88,11 +88,12 @@
                     <span class="play-text">RESGATAR</span>
                 </button>
                 <div class="viewer-3d resgatar-3d">
-                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="4deg"
-                        camera-controls="false" disable-zoom exposure="0.9" shadow-intensity="0"
-                        environment-image="neutral" loading="lazy" interpolation-decay="200"
-                        power-preference="low-power" antialias="false">
+                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="3deg"
+                        camera-controls="false" disable-zoom exposure="1" shadow-intensity="0"
+                        environment-image="neutral" loading="lazy" interpolation-decay="120" minimum-render-scale="1"
+                        maximum-render-scale="1.25">
                     </model-viewer>
+
 
                 </div>
 
@@ -114,10 +115,12 @@
                 </button>
                 <div class="viewer-3d resgatar-3d">
                     <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="4deg"
-                        camera-controls="false" disable-zoom exposure="0.9" shadow-intensity="0"
-                        environment-image="neutral" loading="lazy" interpolation-decay="200"
-                        power-preference="low-power" antialias="false">
+                        camera-controls="false" disable-zoom exposure="1" shadow-intensity="0"
+                        environment-image="neutral" loading="lazy" interpolation-decay="120" minimum-render-scale="1"
+                        maximum-render-scale="1.25">
                     </model-viewer>
+
+
 
 
                 </div>
@@ -130,20 +133,17 @@
     <script>
         const viewer = document.querySelector("model-viewer");
 
-        let last = 0;
-        function limitFPS(time) {
-            if (time - last > 33) { // ~30fps
-                viewer.timeScale = 1;
-                last = time;
-            } else {
-                viewer.timeScale = 0;
-            }
-            requestAnimationFrame(limitFPS);
-        }
+        // Pausa rotação quando não está visível (economiza GPU)
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                viewer.autoRotate = entry.isIntersecting;
+            },
+            { threshold: 0.2 }
+        );
 
-        requestAnimationFrame(limitFPS);
-
+        observer.observe(viewer);
     </script>
+
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
     <script src="assets/js/confetti.min.js"></script>
