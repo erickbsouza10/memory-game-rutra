@@ -132,7 +132,7 @@ body::before {
   display: grid;
 
   /* FORÇA 5 COLUNAS */
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   /* duas linhas naturais */
   grid-auto-rows: 1fr;
@@ -159,7 +159,7 @@ body::before {
   display: grid;
 
   /* FORÇA 5 COLUNAS */
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   /* duas linhas naturais */
   grid-auto-rows: 1fr;
@@ -601,8 +601,10 @@ body::before {
   inset: 0;
   z-index: 10000;
 
-  background: transparent; /* 🔑 importante */
-  backdrop-filter: none;    /* blur vem no overlay, não aqui */
+  background: rgba(0, 0, 0, 0.267);
+  /* escurece */
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(10px);
 
   display: flex;
   align-items: center;
@@ -611,17 +613,7 @@ body::before {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease;
-
-  overflow: hidden;
 }
-
-
-.win-content {
-  position: relative;
-  z-index: 2;
-}
-
-
 
 
 .win-modal.active {
@@ -637,7 +629,7 @@ body::before {
   /* Não passa de 550px em telas grandes */
   aspect-ratio: 1 / 1;
   /* GARANTE QUE SEJA SEMPRE UM CÍRCULO */
-  
+
   border-radius: 50%;
   /* Força o arredondamento */
   color: white !important;
@@ -658,7 +650,7 @@ body::before {
   animation: winPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   top: -300px;
-  height: 100vh !important;
+  height: auto !important;
 }
 
 .win-content h2 {
@@ -765,12 +757,11 @@ body::before {
 }
 
 .win-content {
-  width: auto;
-  height: auto;
-  min-width: 1080px;
+  width: 600px !important;
+  height: 600px !important;
 
+  border-radius: 100%;
 
-  border-radius: 0 !important;
 
   display: flex;
   flex-direction: column;
@@ -788,7 +779,7 @@ body::before {
 
 /* BOTÃO CIRCULAR DO MODAL */
 .win-circle-btn {
-  width: 13% !important;
+  width: 31% !important;
   height: 60px !important;
 
   border-radius: 30px !important;
@@ -815,8 +806,7 @@ body::before {
 
 .win-text-concluir {
   position: relative;
-  top: -50px !important;
-  transform: scale(0.78);
+  top: 6px !important;
 }
 
 /* ÍCONE DE PRESENTE */
@@ -850,6 +840,7 @@ body::before {
 
 .win-content {
   gap: 12px;
+  transform: scale(1.3);
 }
 
 @keyframes trophyPop {
@@ -920,12 +911,11 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  position: relative;
-  top: -80px;
+
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
   letter-spacing: 1.5px;
-  
+
   cursor: pointer;
 
   /* SOMBRA CIRCULAR CORRETA */
@@ -1003,10 +993,6 @@ body::before {
   display: flex;
   align-items: center;
   gap: 15px;
-  transform: scale(0.8);
- 
-  position: relative;
-  z-index: 999999 !important;
   font-weight: 800;
   color: #18203f;
   transition: all 0.3s ease;
@@ -1071,7 +1057,7 @@ body::before {
 
 .timers {
   position: relative;
-  top: -150px;
+  top: -30px;
   display: flex;
   flex-direction: row;
   right: 20px;
@@ -1173,7 +1159,7 @@ body::before {
   box-shadow:
     0 3px 0px #641e16,
     0 28px 40px rgba(0, 0, 0, 0.116);
-
+  border-radius: 100px;
 }
 
 .win-content.lose .win-circle-btn:hover {
@@ -1293,29 +1279,117 @@ model-viewer {
   top: 50px;
 }
 
-
-/* ===== VIDEO BACKGROUND MODAL ===== */
-/* ===== FRAME DO VÍDEO (ENCAPSULADO) ===== */
-.video-frame {
-  position: fixed;
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 53%;
-  z-index: 0;
-  pointer-events: none;
+.win-content {
+  height: 100vh !important;
+  margin-top: 500px;
 }
 
-/* ===== VÍDEO EM PROPORÇÃO ORIGINAL ===== */
-.win-video {
-  width: auto;
-  height: auto;
+/* ===============================
+   TABLET GRANDE – 2360x1640
+=============================== */
+@media (min-width: 2200px) and (min-height: 1500px) {
 
-  max-width: 90vw;   /* limita na largura da tela */
-  max-height: 90vh;  /* limita na altura da tela */
+  /* APP */
+  .app {
+    padding: 24px;
+  }
 
-  object-fit: contain; /* 🔑 mantém proporção original */
+  /* ===== BOARD ===== */
+  .board {
+    max-width: 00px;
+    gap: 36px;
+    margin-top: 40px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .card {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  /* ===== START SCREEN ===== */
+  .main-logo {
+    width: 600px !important;
+    top: -10px !important;
+  }
+
+  .logo-glow {
+    width: 420px;
+    height: 420px;
+    filter: blur(120px);
+  }
+
+  .game-title {
+    font-size: 34px !important;
+    letter-spacing: 10px;
+    margin-bottom: 48px;
+  }
+
+  .play-btn {
+    transform: scale(1.25) !important;
+    padding: 30px 80px !important;
+    font-size: 1.6rem;
+  }
+
+  /* ===== TIMER ===== */
+  .timers {
+    top: 0;
+    right: 0;
+    gap: 20px;
+  }
+
+  .game-timer {
+    font-size: 4.6rem;
+    width: 220px;
+  }
+
+  .pizza-timer {
+    width: 120px;
+    height: 120px;
+    transform: scale(1);
+  }
+
+  /* ===== MODAL DE VITÓRIA ===== */
+  .win-content {
+    width: 720px !important;
+    height: 720px !important;
+    transform: scale(1);
+    top: 0;
+    margin-top: 0;
+  }
+
+  .win-content h2 {
+    font-size: 2.8rem;
+  }
+
+  .win-content p {
+    font-size: 1.1rem;
+    width: 65%;
+  }
+
+  .win-circle-btn {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .win-circle-btn .play-text {
+    font-size: 1.6rem !important;
+  }
+
+  .win-trophy {
+    width: 120px;
+    top: 20px;
+  }
+
+  /* ===== VIEWER 3D ===== */
+  .viewer-3d {
+    width: 900px;
+    height: 900px;
+  }
+
+  .resgatar-3d {
+    width: 480px !important;
+    height: 480px !important;
+    top: 20px;
+  }
 }
-
