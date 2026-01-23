@@ -88,10 +88,12 @@
                     <span class="play-text">RESGATAR</span>
                 </button>
                 <div class="viewer-3d resgatar-3d">
-                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="8deg"
-                        camera-controls disable-zoom exposure="1" shadow-intensity="0" environment-image="neutral"
-                        loading="lazy" reveal="auto">
+                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="4deg"
+                        camera-controls="false" disable-zoom exposure="0.9" shadow-intensity="0"
+                        environment-image="neutral" loading="lazy" interpolation-decay="200"
+                        power-preference="low-power" antialias="false">
                     </model-viewer>
+
                 </div>
 
             </div>
@@ -111,10 +113,12 @@
                     <span class="play-text">CONCLUIR</span>
                 </button>
                 <div class="viewer-3d resgatar-3d">
-                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="8deg"
-                        camera-controls disable-zoom exposure="1" shadow-intensity="0" environment-image="neutral"
-                        loading="lazy" reveal="auto">
+                    <model-viewer src="assets/copo_rutra_premium8.glb" auto-rotate rotation-per-second="4deg"
+                        camera-controls="false" disable-zoom exposure="0.9" shadow-intensity="0"
+                        environment-image="neutral" loading="lazy" interpolation-decay="200"
+                        power-preference="low-power" antialias="false">
                     </model-viewer>
+
 
                 </div>
 
@@ -123,6 +127,23 @@
 
 
     </div>
+    <script>
+        const viewer = document.querySelector("model-viewer");
+
+        let last = 0;
+        function limitFPS(time) {
+            if (time - last > 33) { // ~30fps
+                viewer.timeScale = 1;
+                last = time;
+            } else {
+                viewer.timeScale = 0;
+            }
+            requestAnimationFrame(limitFPS);
+        }
+
+        requestAnimationFrame(limitFPS);
+
+    </script>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
     <script src="assets/js/confetti.min.js"></script>
